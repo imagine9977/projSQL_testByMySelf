@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC 
+"-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- typeAliases 태그 내부에는 typeAlias태그로 각종 DTO를 설정 -->
+	<!-- 별도의 각주는 사용하지 않는 것이 좋으며, 중복되어서는 안됨. 따라서 아래 둘 중 하나만 사용해 한다 -->
+	<!--  기본 타입은 설정하지 않으며, 참조형이여한다-->
+	<typeAliases>
+		<!-- <package name="com.spring1" /> -->
+		<package name="com.proj03"  />
+	</typeAliases>
+</configuration>

@@ -1,0 +1,13 @@
+create table qna (
+	qno int auto_increment primary key,			-- 글번호
+    qtitle varchar(100) not null,				-- 글제목
+    qcontent varchar(2000),						-- 글내용
+     qlevel int not null default 1,				-- 글종류(1:원글 2:댓글)
+    qparno int not null default 0,				-- 투고글 그룹
+    qhits int default 0,						-- 방문 횟수
+    qresdate timestamp default current_timestamp,	-- 작성일
+    qaid varchar(30) not null,					-- 작성자 아이디
+    qname varchar(50) not null, 				-- 작성자 이름
+    secret BOOL default 0, 						-- 비밀글 여부
+    cate  ENUM('acc', 'pay', 'ref', 'etc') NOT NULL       -- 주제(acc:계정, pay: 결제, ref: 환불, etc:기타)
+);
