@@ -19,7 +19,7 @@ public class Qna {
 	private String qcontent;
 	private String qresdate;
 	private int qhits;
-	private Member member;
+	private Member member; 
 	private boolean secret;
 	private String cate;
 }

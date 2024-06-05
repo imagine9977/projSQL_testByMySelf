@@ -32,7 +32,7 @@ header {
 	</div> 
 	<div id="second_line">
 		<a href="${path1 }"><img
-			src="${hpath}/myapp/resources/images/favicon.ico"
+			src="${hpath}/myapp/resources/images/favicon.png"
 			style="margin-left: 50px; width: 100px; height: 100px;"></a>
 		<nav id="navHeader">
 			<ul>

@@ -7,14 +7,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${title }</title>
+<title>${qno }  ${qtitle }</title>
 <%@ include file="../include/head.jsp" %>
 <style>
 .container { width:1400px; }
 .page { clear:both; height:100vh; }
 #page1 { background-color:#ececec; }
 #page2 { background-color:#42bcf5; }
-.page_title { font-size:36px; padding-top:2em; text-align:center; }
+.page_qtitle { font-size:36px; padding-top:2em; text-align:center; }
 </style>
 </head>
 <body>
@@ -34,24 +34,20 @@
 			<hr>
 		</div>
 		<%
-			int parno = Integer.parseInt(request.getParameter("parno"));
-			pageContext.setAttribute("parno", parno);
+			int qparno = Integer.parseInt(request.getParameter("qparno"));
+			pageContext.setAttribute("qparno", qparno);
 		%>
 		<div style="width:1400px; margin:0 auto;">
-			<h3 class="page_title">답변 등록</h3>
-			<form action="${path0 }/AnswerIns.do" method="post">
+			<h3 class="page_qtitle">답변 등록</h3>
+			<form action="${path0 }/qna/insertAnswPro.do" method="post">
 				<table class="table">
 					<tbody>
+						
 						<tr>
-							<th><label for="title">제목</label></th>
-							<td>
-								<input type="hidden" name="parno" id="parno" value="${parno }" />
-								<input type="text" name="title" id="title" class="form-control" maxlength="100" required>
-							</td>
-						</tr>
-						<tr>
+						
 							<th><label for="content">내용</label></th>
 							<td>
+								<input type="hidden" name="qparno" id="qparno" value="${qparno }" />
 								<textarea name="content" id="content" rows="8" cols="80" class="form-control"></textarea>
 							</td>
 						</tr>
@@ -60,7 +56,7 @@
 				<hr>
 				<div class="btn-group">
 				  <button type="submit" class="btn btn-secondary">답변 등록</button>
-				  <a href="${path0 }/GetQnaList.do" class="btn btn-secondary">질문 및 답변 목록</a>
+				  <a href="${path0 }/qna/getQnaList.do" class="btn btn-secondary">질문 및 답변 목록</a>
 				</div>
 			</form>
 		</div>

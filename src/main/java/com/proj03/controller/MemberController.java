@@ -86,6 +86,7 @@ public class MemberController {
 		member.setAddr1(request.getParameter("addr1"));
 		member.setAddr2(request.getParameter("addr2"));
 		member.setPostcode(request.getParameter("postcode"));
+		member.setBirth(request.getParameter("birth"));
 		memberService.insMember(member);
 		model.addAttribute("msg", "회원가입을 축하합니다.");
 		return "redirect:/";
@@ -142,6 +143,7 @@ public class MemberController {
 		member.setAddr1(request.getParameter("addr1"));
 		member.setAddr2(request.getParameter("addr2"));
 		member.setPostcode(request.getParameter("postcode"));
+		member.setBirth(request.getParameter("birth"));
 		memberService.changeInfo(member);
 		model.addAttribute("msg", "회원가입을 축하합니다.");
 		session.invalidate();

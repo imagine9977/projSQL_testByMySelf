@@ -6,7 +6,7 @@
 <c:set var="hpath" value="<%= request.getContextPath() %>"/>
 <link rel="stylesheet" href="${hpath }/resources/css/common.css?after3"/>
 <link rel="stylesheet" href="${hpath }/resources/css/header.css?after3"/>
-<script src="${hpath }/js/jquery-3.2.1.min.js"></script>
+<script src="${hpath }/resources/js/jquery-3.2.1.min.js"></script>
 <meta property="og:url" content="">
 <meta property="og:title" content="samdasu">
 <meta property="og:description" content="게임 , 콘솔 ">

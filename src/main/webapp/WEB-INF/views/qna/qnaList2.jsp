@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<c:set var="path0" value="<%=request.getContextPath()%>" />
+<c:set var="path1" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,7 +33,7 @@
 }
 
 .page_title {
-	font-size: 36px;
+	font-size: 30px;
 	padding-top: 2em;
 	text-align: center;
 }
@@ -178,10 +178,10 @@ body {
 	margin: 1rem;
 }
 
+
 .box4 {
 	border-bottom: 1px solid grey;
-	background-color: #272727;
-	font-size: 25px;
+	background-color: #272727; font-size : 25px;
 	color: white;
 	display: flex; /* new */
 	justify-content: center;
@@ -189,6 +189,8 @@ body {
 	text-align: center;
 	cursor: pointer;
 	font-size: 25px;
+	
+	
 }
 
 .box4:hover {
@@ -218,32 +220,29 @@ body {
 			<div class="parent">
 				<div class="box box1">SqlGaming 고객센터</div>
 				<div class="box box2">box 2</div>
-				<div class="box box3_1">문의유형 선택 문의유형을 선택하면 문의유형에 따라 [자주 찾는
-					도움말]을 확인할 수 있습니다. 찾는 도움말이 보이지 않으면 [도움말 검색]을 이용해 원하는 도움말을 찾아 주세요.
-
-					문의방법 자세히보기문의유형 전체보기 아이디정보/보안결제게임 문의이벤트</div>
+				<div class="box box3_1">문의유형을 선택하면 해당 유형에 맞는 [자주 묻는 질문]을 확인할 수 있습니다. 필요한 도움말이 없으면 문의를 이용해보세요.</div>
 				<div class="box box3_2">자세한</div>
 				<div class="box4 box4_1">
 					<span data-tab-value="#tab_1">전체보기</span>
 				</div>
 				<div class="box4 box4_2"
 					onclick="window.location.href=
-'${path0 }/qna/catelist.do?cat=acc#page1'">
+'${path1 }/qna/catelist.do?cat=acc#page1'">
 					<span data-tab-value="#tab_2">계정</span>
 				</div>
 				<div class="box4 box4_3"
 					onclick="window.location.href=
-'${path0 }/qna/catelist.do?cat=pay#page1'">
+'${path1}/qna/catelist.do?cat=pay#page1'">
 					<span data-tab-value="#tab_3">결제</span>
 				</div>
 				<div class="box4 box4_4"
 					onclick="window.location.href=
-'${path0 }/qna/catelist.do?cat=ref#page1'">
+'${path1 }/qna/catelist.do?cat=ref#page1'">
 					<span data-tab-value="#tab_4">환불</span>
 				</div>
 				<div class="box4 box4_5"
 					onclick="window.location.href=
-'${path0 }/qna/catelist.do?cat=etc#page1'">
+'${path1 }/qna/catelist.do?cat=etc#page1'">
 					<span data-tab-value="#tab_5">기타</span>
 				</div>
 				<div class="box box5">
@@ -274,7 +273,7 @@ body {
 													 </c:if> <c:if test="${dto.cate=='etc'}"> 기타
 												
 													 </c:if></td>
-												<td><c:if test="${(empty sid) or (dto.secret=1)}">
+												<td><c:if test="${(empty sid) or (dto.secret eq true)}">
 														<c:if test="${dto.qlevel==1 }">
 															<strong class="page_title">${dto.qtitle }</strong>
 														</c:if>
@@ -283,9 +282,9 @@ body {
 																${dto.qtitle }</strong>
 														</c:if>
 													</c:if> <c:if test="${(not empty sid) and (dto.qlevel==1)}">
-														<a href="${path0 }/detail.do?no=${dto.qno }">${dto.qtitle }</a>
+														<a href="${path1 }/qna/detail.do?qno=${dto.qno }">${dto.qtitle }</a>
 													</c:if> <c:if test="${(not empty sid) and (dto.qlevel==2)}">
-														<a href="${path0 }/detail.do?no=${dto.qno }"><span
+														<a href="${path1 }/qna/detail.do?qno=${dto.qno }"><span
 															style="padding-left: 40px">[답변]</span> ${dto.qtitle }</a>
 													</c:if></td>
 												<td><fmt:parseDate value="${dto.qresdate }" var="res"
@@ -293,7 +292,7 @@ body {
 														value="${res }" var="resdate" pattern="yyyy년 MM월 dd일" />
 													${resdate }</td>
 												<td>${dto.qhits }</td>
-												<td>${dto.member.id }</td>
+												<td>${dto.getMember().id }</td>
 											</tr>
 										</c:forEach>
 									</c:if>
@@ -315,7 +314,7 @@ body {
 						<hr>
 						<c:if test="${not empty sid }">
 							<div class="btn-group">
-								<a href="${path0 }/qna/qna_ins.jsp" class="btns">질문 작성</a>
+								<a href="${path1 }/qna/insertQues.do" class="btns">질문 작성</a>
 							</div>
 						</c:if>
 					</div>

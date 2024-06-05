@@ -53,8 +53,7 @@
 			</div>
 			<div style="width: 1400px; margin: 0 auto;">
 				<h3 class="page_title">질문 등록</h3>
-				<form action="${path0 }/QuestionIns.do" method="post">
-					<div class="box box6">
+				<div class="box box6">
 
 						<h3>1. 동의사항</h3>
 						<ul>
@@ -68,9 +67,12 @@
 								class="form-check_lable">위 이용약관에 동의합니다.</label>
 						</div>
 					</div>
+				<form action="${path0 }/qna/insertQuesPro.do" method="post">
+					
 
 					<div class=" box7">
 						<h3>2. 문의사항 작성하기</h3>
+
 						<table>
 							<colgroup>
 								<col style="width: 13%">
@@ -80,33 +82,31 @@
 							</colgroup>
 							<tbody>
 								<tr>
-									<th scope="row">종류</th>
-									<td id="category"><select>
-											<option value="0">계정</option>
-											<option value="1">결제</option>
-											<option value="2">환불</option>
-											<option value="3">기타</option>
-
+									<th scope="row"><label for="cate">분류</label></th>
+									<td ><select id="cate" name="cate"> 
+											<option value="acc">계정</option>
+											<option value="pay">결제</option>
+											<option value="ref">환불</option>
+											<option value="etc">기타</option>
 									</select></td>
-									<th scope="secret">비밀글</th>
+									<th scope="row">비밀글</th>
 									<td>
-										<form>
-											<div>
-												<input type="checkbox" id="secretQ" name="secretQ"
-													value="secret" />
-											</div>
 
-										</form>
+										<div>
+											<input type="checkbox" id="secret" name="secret"
+												value="false" data-switchval />
+										</div>
+
 									</td>
 								</tr>
 								<tr>
 
 									<th scope="row">고객명</th>
 									<td colspan="1"><input type="text" style="width: 100px"
-										class="input_st" id="qname" value="${mem.name}"></td>
+										class="input_st" id="qname" value="${qname}" placeholder="${sname }" disabled></td>
 									<th scope="row">ID</th>
 									<td><input type="text" style="width: 239px"
-										class="input_st" id="qid" value="${mem.id }"></td>
+										class="input_st" id="qid" value="${qaid}" placeholder="${sid }" disabled></td>
 								</tr>
 
 
@@ -114,17 +114,17 @@
 								<tr>
 									<th scope="row">제목</th>
 									<td colspan="3"><input type="text" style="width: 631px"
-										class="input_st" id="qtitle"></td>
+										class="input_st" id="qtitle" name="qtitle" required></td>
 								</tr>
 								<!-- 던파 비회원 접수 시 아이디 / 이름 입력 End -->
 								<tr id="inquirytrText">
 									<th>내용</th>
 									<td colspan="3"><textarea class="input_st" id="qcontent"
 											style="width: 700px; height: 150px"
-											placeholder="여기에 오류 사항등을 기재하십시오"></textarea></td>
+											placeholder="여기에 오류 사항등을 기재하십시오" required></textarea></td>
 								</tr>
 
-
+								<!--  
 								<tr id="inquiry_email" class="reply-notice">
 									<th scope="row">답변 알림받기</th>
 									<td colspan="3">
@@ -134,33 +134,45 @@
 										</div>
 										<div class="alarm_bx">
 											<span class="checkbox_st1"> <input type="checkbox"
-												id="inquiry_email_send"> <label
-												for="inquiry_email_send"> <span name="nameText"
-													id="spEmail">(선택) 이메일 수집 및 이용 동의</span>
+												id="inquiry_email_send" data-switchval value="false">
+												<label for="inquiry_email_send"> <span
+													name="nameText" id="spEmail">(선택) 이메일 수집 및 이용 동의</span>
 											</label>
 
 											</span> <br /> <input type="email" name="email" id="email"
-												value="${mem.email }" class="form-control" required>
+												value="${mem.email }" class="form-control"
+												placeholder="이메일 입력" disabled>
 
 										</div>
 									</td>
 								</tr>
-
+								-->
 							</tbody>
 						</table>
-						
-
 					</div>
-
 					<div class="btn-group">
 						<button type="submit" class="btn btn-secondary">질문 등록</button>
-						<a href="${path0 }/GetQnaList.do" class="btn btn-secondary">질문
+						<a href="${path0 }/qna/list.do" class="btn btn-secondary">질문
 							및 답변 목록</a>
 					</div>
 				</form>
+
+
 			</div>
+
+
 		</section>
 	</div>
+
+	<script>
+        
+    document.querySelector('[data-switchval]').addEventListener('change', e => {
+    	  e.target.value = e.target.checked
+    	  console.log('current value of checkbox:', e.target.value)
+    	})
+    </script>
+
+
 	<div id="footer">
 		<%@ include file="../include/footer.jsp"%>
 	</div>

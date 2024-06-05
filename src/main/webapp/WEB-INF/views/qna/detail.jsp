@@ -47,43 +47,54 @@ word-break: break-word;
 					<tbody>
 						<tr>
 							<th>글 번호</th>
-							<td>${qna.no }</td>
+							<td>${qna.qno }</td>
 						</tr>
 						<tr>
 							<th>글 제목</th>
-							<td>${qna.title }</td>
+							<td>${qna.qtitle }</td>
+						</tr>
+						<tr>
+							<th>작성자</th>
+							<td>${qna.member.id }</td>
 						</tr>
 						<tr>
 							<th>글 내용</th>
-							<td>${qna.content }</td>
+							
+							<td><div style="width:100%; ">
+							
+							${qna.qcontent }
+							</div></td>
 						</tr>
 						<tr>
 							<th>작성일시</th>		
-							<td>${qna.resdate }</td>
+							<td>${qna.qresdate }</td>
 						</tr>
 						<tr>
 							<th>조회수</th>
-							<td>${qna.visited }</td>
+							<td>${qna.qhits }</td>
 						</tr>
 					</tbody>
 				</table>
 				<hr>
 				<div class="btn-group">
-				  <c:if test="${(not empty sid) and qna.plevel==1 }">
-				  <a href="${path0 }/qna/aIns2.jsp?parno=${qna.no }" class="btn btn-secondary">답변 등록</a>
+				  <c:if test="${(not empty sid) and qna.qlevel==1 }">
+				  <a href="${path0 }/qna/insertAnsw.do?qparno=${qna.qno }" class="btn btn-secondary">답변 등록</a>
 				  </c:if>
-				  <c:if test="${sid.equals(qna.aid) }">
-					  <c:if test="${qna.plevel==1 }">
-					  <a href="${path0 }/EditQna.do?no=${qna.no }" class="btn btn-secondary">질문 수정</a>
-					  <a href="${path0 }/DelQuestion.do?parno=${qna.no }" class="btn btn-secondary">질문 삭제</a>
+				  <c:if test="${sid.equals(qna.member.qaid) }">
+					  <c:if test="${qna.qlevel==1 }"> 
+					  <a href="${path0 }/qna/update.do?qno=${qna.qno }" class="btn btn-secondary">질문 수정</a>
+					  <a href="${path0 }/qna/delqna.do?qparno=${qna.qno }" class="btn btn-secondary">질문 삭제</a>
 					  </c:if>
-					  <c:if test="${qna.plevel==2 }">
-					  <a href="${path0 }/EditQna.do?no=${qna.no }" class="btn btn-secondary">답변 수정</a>
-					  <a href="${path0 }/DelAnswer.do?no=${qna.no }" class="btn btn-secondary">답변 삭제</a>
+					  <c:if test="${qna.qlevel==2 }">
+					  <a href="${path0 }/qna/update.do?qno=${qna.qno }" class="btn btn-secondary">답변 수정</a>
+					  <a href="${path0 }/qna/delansw.do?qno=${qna.qno }" class="btn btn-secondary">답변 삭제</a>
 					  </c:if>
   				  </c:if>
-				  <a href="${path0 }/GetQnaList.do" class="btn btn-secondary">질문 및 답변 목록</a>
+				  <a href="${path0 }/qna/list.do" class="btn btn-secondary">질문 및 답변 목록</a>
 				</div>
+			</div>
+			<div class="see reply">
+				<c:if test="${sid.equals(qna.member.qaid)}" ></c:if>
 			</div>
 		</div>
 	</section>

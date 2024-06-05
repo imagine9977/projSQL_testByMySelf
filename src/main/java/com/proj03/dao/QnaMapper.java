@@ -8,10 +8,11 @@ public interface QnaMapper {
 
 	public List<Qna> getCatQnaList(String cat);
 	public List<Qna> getQnaList();
-	public Qna getQna(int bno);
+	public Qna getQna(int qno);
 	public int insQues(Qna qna);
 	public int insAnsw(Qna qna);
 	public int editProQna(Qna qna);
-	public int delQues(int no);
-	public int delAnsw(int no);
+	public int delQues(int qno);
+	public int delAnsw(int qno);
+	public void hitCount(int qno);
 }

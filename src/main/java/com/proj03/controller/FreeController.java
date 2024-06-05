@@ -41,9 +41,6 @@ public class FreeController {
 	private FreeBiz freeService;
 	
 	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
 	private HttpSession session;
 	
 	@RequestMapping("list.do")

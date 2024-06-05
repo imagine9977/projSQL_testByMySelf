@@ -21,9 +21,10 @@ public class QnaService implements QnaBiz {
 	}
 
 	@Override
-	public Qna getQna(int bno) {
+	public Qna getQna(int qno) {
 		// TODO Auto-generated method stub
-		return qnaDAO.getQna(bno);
+		qnaDAO.hitCount(qno);
+		return qnaDAO.getQna(qno);
 	}
 
 	@Override
@@ -47,15 +48,15 @@ public class QnaService implements QnaBiz {
 	}
 
 	@Override
-	public int delQues(int no) {
+	public int delQues(int qno) {
 		// TODO Auto-generated method stub
-		return qnaDAO.delQues(no);
+		return qnaDAO.delQues(qno);
 	}
 
 	@Override
-	public int delAnsw(int no) {
+	public int delAnsw(int qno) {
 		// TODO Auto-generated method stub
-		return qnaDAO.delAnsw(no);
+		return qnaDAO.delAnsw(qno);
 	}
 
 	@Override

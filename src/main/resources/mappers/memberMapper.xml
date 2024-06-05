@@ -5,7 +5,7 @@
 <mapper namespace="member">
 
 	<select id="getMemberList" resultType="com.proj03.dto.Member">
-		select * from member order by regdate desc
+		select * from member order by resdate desc
 	</select>	
 	<select id="getMember" parameterType="String" resultType="com.proj03.dto.Member">
 		select * from member where id=#{id}
@@ -15,7 +15,7 @@
 	</select>
 	<insert id="insMember">
 		insert into member values (#{id}, #{pw}, #{name}, #{email}, #{tel}, 
-		#{addr1}, #{addr2}, #{postcode}, #{birth}, default, default)
+		#{addr1}, #{addr2}, #{postcode}, #{birth}, default,#{tag1}, #{tag2},#{tag3} ,  default)
 	</insert>
 	<update id="changePw">
 		update member set pw=#{pw} where id=#{id}

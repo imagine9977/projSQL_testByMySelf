@@ -20,8 +20,8 @@ public class QnaDAO implements QnaMapper {
 	}
 
 	@Override
-	public Qna getQna(int no) {
-		return sqlSession.selectOne("Qna.getQna", no);
+	public Qna getQna(int qno) {
+		return sqlSession.selectOne("Qna.getQna", qno);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class QnaDAO implements QnaMapper {
 	}
 
 	@Override
-	public int delAnsw(int no) {
-		return sqlSession.delete("Qna.delAnsw", no);
+	public int delAnsw(int qno) {
+		return sqlSession.delete("Qna.delAnsw", qno);
 	}
 
 
@@ -58,6 +58,12 @@ public class QnaDAO implements QnaMapper {
 			return sqlSession.selectList("Qna.getQnaList");
 		}
 		return sqlSession.selectList("Qna.getCatQnaList",cat);
+	}
+
+	@Override
+	public void hitCount(int qno) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("Qna.hitCount", qno);
 	}
 
 
