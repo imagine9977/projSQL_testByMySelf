@@ -12,4 +12,5 @@ public interface BoardBiz {
 	public void upBoard(Board board);
 	public void vcntCount(int bno);
 	public void delBoard(int bno);
+	public void editBoard(Board board);
 }

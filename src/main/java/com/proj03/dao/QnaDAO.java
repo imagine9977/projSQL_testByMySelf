@@ -26,7 +26,8 @@ public class QnaDAO implements QnaMapper {
 
 	@Override
 	public int insQues(Qna qna) {
-		return sqlSession.insert("Qna.insQues", qna);
+		int x= sqlSession.insert("Qna.insQues", qna);
+		return sqlSession.insert("Qna.upParno", qna);
 	}
 
 	@Override
@@ -40,13 +41,13 @@ public class QnaDAO implements QnaMapper {
 	}
 
 	@Override
-	public int delQues(int no) {
-		return sqlSession.delete("Qna.delQues", no);
+	public int delQues(int qno) {
+		return sqlSession.delete("Qna.delQna", qno);
 	}
 
 	@Override
 	public int delAnsw(int qno) {
-		return sqlSession.delete("Qna.delAnsw", qno);
+		return sqlSession.delete("Qna.delAns", qno);
 	}
 
 

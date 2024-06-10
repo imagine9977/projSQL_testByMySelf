@@ -48,5 +48,11 @@ public class BoardService implements BoardBiz {
 	public void delBoard(int bno) {
 		boardDAO.delBoard(bno);
 	}
+
+	@Override
+	public void editBoard(Board board) {
+		boardDAO.editBoard(board);
+		
+	}
 	
 }

@@ -330,7 +330,7 @@ public class AdminController {
 		product.setPname(pname);
 		product.setCom(com);
 		product.setPrice(price);
-		product.setImg(imgName);
+		product.setImg(imgName); 
 		product.setImg2(img2Name);
 		product.setImg3(img3Name);
 		

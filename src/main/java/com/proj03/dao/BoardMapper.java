@@ -12,4 +12,5 @@ public interface BoardMapper {
 	public void upBoard(Board board);
 	public void delBoard(int bno);
 	public void vcntCount(int bno);
+	public void editBoard(Board board);
 }

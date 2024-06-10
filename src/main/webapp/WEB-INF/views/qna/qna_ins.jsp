@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="path0" value="<%=request.getContextPath()%>" />
+<c:set var="hpath" value="<%=request.getContextPath()%>" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +44,7 @@
 				<nav aria-label="breadcrumb" style="text-align: right">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="#">Home</a></li>
-						<li class="breadcrumb-item"><a href="${path0 }/GetQnaList.do">질문
+						<li class="breadcrumb-item"><a href="${hpath }/GetQnaList.do">질문
 								및 답변</a></li>
 						<li class="breadcrumb-item active" aria-current="page">질문 등록</li>
 					</ol>
@@ -67,7 +67,7 @@
 								class="form-check_lable">위 이용약관에 동의합니다.</label>
 						</div>
 					</div>
-				<form action="${path0 }/qna/insertQuesPro.do" method="post">
+				<form action="${hpath }/qna/insertQuesPro.do" method="post">
 					
 
 					<div class=" box7">
@@ -103,10 +103,10 @@
 
 									<th scope="row">고객명</th>
 									<td colspan="1"><input type="text" style="width: 100px"
-										class="input_st" id="qname" value="${qname}" placeholder="${sname }" disabled></td>
+										class="input_st" id="qname" value="${sname}" placeholder="${sname }" disabled></td>
 									<th scope="row">ID</th>
 									<td><input type="text" style="width: 239px"
-										class="input_st" id="qid" value="${qaid}" placeholder="${sid }" disabled></td>
+										class="input_st" id="qid" value="${sid}" placeholder="${sid }" disabled></td>
 								</tr>
 
 
@@ -152,7 +152,7 @@
 					</div>
 					<div class="btn-group">
 						<button type="submit" class="btn btn-secondary">질문 등록</button>
-						<a href="${path0 }/qna/list.do" class="btn btn-secondary">질문
+						<a href="${hpath }/qna/list.do" class="btn btn-secondary">질문
 							및 답변 목록</a>
 					</div>
 				</form>

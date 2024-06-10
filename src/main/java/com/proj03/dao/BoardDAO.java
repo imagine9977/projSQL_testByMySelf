@@ -33,7 +33,7 @@ public class BoardDAO implements BoardMapper {
 	}
 
 	@Override
-	public void upBoard(Board board) {
+	public void editBoard(Board board) {
 		sqlSession.update("board.upBoard", board);
 	}
 
@@ -55,6 +55,13 @@ public class BoardDAO implements BoardMapper {
 		sqlSession.update("board.vcntCount", bno);
 		
 	}
+
+	@Override
+	public void upBoard(Board board) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 }
