@@ -51,6 +51,7 @@
 				</nav>
 				<hr>
 			</div>
+
 			<div style="width: 1400px; margin: 0 auto;">
 				<c:if test="${qna.qlevel==1 }">
 					<h3 class="page_title">질문 수정</h3>
@@ -58,7 +59,9 @@
 				<c:if test="${qna.qlevel==2 }">
 					<h3 class="page_title">답변 수정</h3>
 				</c:if>
-				<form action="${hpath }/qna/updatePro.do" method="post">
+				<form action="${hpath}/qna/updatePro.do" method="post"
+					onsubmit="addHiddenInputForCheckboxes()">
+
 					<table class="table">
 						<colgroup>
 							<col style="width: 13%">
@@ -68,7 +71,7 @@
 						</colgroup>
 						<tbody>
 							<tr>
-							<th scope="row">비밀글</th>
+								<th scope="row">비밀글</th>
 								<td><c:if test="${qna.qlevel==1 }">
 										<c:if test="${qna.secret }">
 											<input type="checkbox" id="secret" name="secret"
@@ -89,6 +92,18 @@
 										</c:if>
 									</c:if>
 									<div></div></td>
+
+								<th>답변 상태</th>
+								<td> <c:if test="${sid == 'admin'}">
+										<c:if test="${qna.replied }">
+											<input type="checkbox" id="replied" name="replied"
+												value="${qna.replied }" checked data-switchval />
+										</c:if>
+										<c:if test="${!qna.replied }">
+											<input type="checkbox" id="replied" name="replied"
+												value="${qna.replied }" data-switchval />
+										</c:if>
+										</c:if> <c:if test="${sid != 'admin' }">유저 제한</c:if></td>
 							</tr>
 							<tr>
 								<th><label for="qtitle">제목</label></th>
@@ -100,7 +115,8 @@
 									</c:if> <c:if test="${ qna.qlevel == 2}">
 										<input type="text" name="qtitle" id="qtitle"
 											class="form-control" maxlength="100" value="${qna.qtitle }"
-											disabled><input type="hidden" name="qtitle" value="${qna.qtitle}">
+											disabled>
+										<input type="hidden" name="qtitle" value="${qna.qtitle}">
 									</c:if></td>
 
 
@@ -128,32 +144,35 @@
 					<div class="btn-group">
 						<button type="submit" class="btn btn-secondary">질문 및 답변
 							수정</button>
-						<a href="${hpath }/qna/list.do" class="btn btn-secondary">질문 및 답변
-							목록</a> <a href="${hpath }/qna/detail.do?qno=${qna.qno} "
+						<a href="${hpath }/qna/list.do" class="btn btn-secondary">질문 및
+							답변 목록</a> <a href="${hpath }/qna/detail.do?qno=${qna.qno} "
 							class="btn btn-secondary">뒤로가기</a>
 					</div>
 				</form>
 
 				<script>
-					function switchResult(a) {
-						switch a {
-						case "acc":
-							return "계정";
-						case "pay":
-							return "결제";
-						case "ref":
-							return "환불";
-						default:
-							return "기타";
-						}
-					}
+					
 					</script>
-					<script>
-				    document.querySelector('[data-switchval]').addEventListener('change', e => {
-				    	  e.target.value = e.target.checked
-				    	  console.log('current value of checkbox:', e.target.value)
-				    	})
-				   
+				<script>
+				document.querySelectorAll('[data-switchval]').forEach(checkbox => {
+			        checkbox.addEventListener('change', e => {
+			            e.target.value = e.target.checked;
+			            console.log('current value of checkbox:', e.target.value);
+			        });
+			    });
+
+			    // 체크되지 않은 체크박스에 대해 hidden input 추가
+			    function addHiddenInputForCheckboxes() {
+			        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+			            if (!checkbox.checked) {
+			                var hiddenInput = document.createElement('input');
+			                hiddenInput.type = 'hidden';
+			                hiddenInput.name = checkbox.name;
+			                hiddenInput.value = 'false';
+			                checkbox.form.appendChild(hiddenInput);
+			            }
+			        });
+    			}
 				</script>
 			</div>
 		</section>

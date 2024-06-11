@@ -70,14 +70,13 @@
 										<th class="item4">작성일</th>
 										<th class="item5">조회수</th>
 										<th class="item6">작성자</th>
+										<th class="item7">상태</th>
 									</tr>
 								</thead>
 								<tbody>
 
 									<c:if test="${not empty qnaList }">
 										<c:forEach var="dto" items="${qnaList }" varStatus="status">
-
-
 											<tr>
 												<td>${fn:length(qnaList) - status.index }</td>
 												<td><c:if test="${dto.cate=='acc'}"> 계정
@@ -93,7 +92,6 @@
 													style="text-align: left; text-overflow: ellipsis; overflow: hidden; white-space: no-wrap; /* Only needed when it's set differntly somewhere else */ word-wrap: break-word; max-width: 550px;"><c:if
 														test="${(empty sid) or (dto.secret  and sid != dto.qaid and (sid ne 'admin'))}">
 														<c:if test="${dto.secret or (empty sid)}">&#128274;</c:if>
-
 														<c:if test="${dto.qlevel==1 }">
 															${dto.qtitle } 
 														</c:if>
@@ -104,7 +102,8 @@
 													</c:if> <c:if
 														test="${((not empty sid)  and !dto.secret) 
 													or sid.equals(dto.qaid) or sid == 'admin' }">
-														<c:if test="${dto.secret }">&#128275;</c:if>
+														<c:if test="${dto.secret and (sid == dto.qaid or sid == 'admin' ) }">&#128274;</c:if> 
+														<c:if test="${!dto.secret and (sid == dto.qaid or sid == 'admin' ) }">&#128273;</c:if>
 														<c:if test="${dto.qlevel == 1}">
 															<a href="${hpath }/qna/detail.do?qno=${dto.qno }">${dto.qtitle }</a>
 														</c:if>
@@ -120,6 +119,12 @@
 													${resdate }</td>
 												<td>${dto.qhits }</td>
 												<td>${dto.qaid }</td>
+												<td><c:if test="${!dto.replied}"> 미확인
+												
+													
+													 </c:if> <c:if test="${dto.replied}"> 완료
+												
+													 </c:if></td>
 											</tr>
 										</c:forEach>
 									</c:if>

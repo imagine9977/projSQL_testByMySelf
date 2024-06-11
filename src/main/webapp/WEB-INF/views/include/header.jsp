@@ -21,7 +21,7 @@ header {
 <div id="main_header">
 	<div id="first_line">
 		<c:if test="${not empty sid }">
-			<a href="${hpath }/Logout.do">로그아웃 </a>&nbsp;&nbsp;
+			<a href="${hpath }/member/logout.do">로그아웃 </a>&nbsp;&nbsp;
 		    <a href="${hpath }/EditMember.do?id=${sid}"> 회원정보</a>
 			<a href="${hpath }/EditMember.do?id=${sid}"> 장바구니</a>
 		</c:if>
@@ -32,7 +32,7 @@ header {
 	</div> 
 	<div id="second_line">
 		<a href="${hpath }"><img
-			src="${hpath}/myapp/resources/images/favicon.png"
+			src="${hpath}/resources/images/favicon.png"
 			style="margin-left: 50px; width: 100px; height: 100px;"></a>
 		<nav id="navHeader">
 			<ul>

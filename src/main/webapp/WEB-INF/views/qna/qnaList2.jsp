@@ -67,6 +67,7 @@
 										<th class="item4">작성일</th>
 										<th class="item5">조회수</th>
 										<th class="item6">작성자</th>
+										<th class="item7">상태</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -97,7 +98,8 @@
 													</c:if> <c:if
 														test="${((not empty sid)  and !dto.secret) 
 													or sid.equals(dto.qaid) or sid == 'admin' }">
-														<c:if test="${dto.secret }">&#128275;</c:if>
+														<c:if test="${dto.secret and (sid != dto.qaid and sid != 'admin' ) }">&#128274;</c:if> 
+														<c:if test="${dto.secret and (sid == dto.qaid or sid == 'admin' ) }">&#128273;</c:if>
 														<c:if test="${dto.qlevel == 1}">
 															<a href="${hpath }/qna/detail.do?qno=${dto.qno }">${dto.qtitle }</a>
 														</c:if>
@@ -113,6 +115,12 @@
 													${resdate }</td>
 												<td>${dto.qhits }</td>
 												<td>${dto.qaid }</td>
+												<td><c:if test="${!dto.replied}"> 미확인
+												
+													
+													 </c:if> <c:if test="${dto.replied}"> 완료
+												
+													 </c:if></td>
 											</tr>
 										</c:forEach>
 									</c:if>

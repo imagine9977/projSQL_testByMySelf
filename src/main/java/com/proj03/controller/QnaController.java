@@ -24,7 +24,7 @@ import com.proj03.dto.Qna;
 public class QnaController {
 
 	private static final Logger log = LoggerFactory.getLogger(FreeController.class);
-
+	
 	@Autowired
 	private QnaBiz qnaService;
 	@Autowired
@@ -62,10 +62,6 @@ public class QnaController {
 
 		String id = (String) session.getAttribute("sid");
 		String name = (String) session.getAttribute("sname");
-		Member member = new Member();
-		member.setId(id);
-		member.setName(name);
-		qna.setMember(member);
 		qna.setQaid(id);
 		qna.setQname(name);
 		qna.setCate(cate);
@@ -79,7 +75,7 @@ public class QnaController {
 	}
 
 	@PostMapping("insertAnswPro.do")
-	public String insqnaAnswPro(Qna qna, HttpSession session, @RequestParam("cate") String cate, Model model) {
+	public String insqnaAnswPro(Qna qna, HttpSession session, @RequestParam("cate") String cate, @RequestParam(value = "replied", required = false, defaultValue = "false") Boolean replied, Model model) {
 		String id = (String) session.getAttribute("sid");
 		String name = (String) session.getAttribute("sname");
 	
@@ -87,7 +83,7 @@ public class QnaController {
 		qna.setQname(name);
 		qna.setCate(cate);
 		qna.setQlevel(2);
-
+		qna.setReplied(replied);
 		qnaService.insAnsw(qna);
 		return "redirect:list.do";
 	}
@@ -99,9 +95,11 @@ public class QnaController {
 	}
 
 	@PostMapping("updatePro.do")
-	public String upqnaPro(Qna qna, Model model) {
-		qnaService.editProQna(qna);
-		return "redirect:list.do";
+	public String upqnaPro(Qna qna, @RequestParam(value = "replied", required = false, defaultValue = "false") Boolean replied, Model model) {
+	    log.info("답변 상태: {}", replied);
+	    qna.setReplied(replied);
+	    qnaService.editProQna(qna);
+	    return "redirect:detail.do?qno=" + qna.getQno();
 	}
 
 	@RequestMapping("delqna.do")

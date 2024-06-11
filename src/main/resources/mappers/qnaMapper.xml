@@ -32,7 +32,7 @@
 		select q.qno, q.cate,
 		q.qtitle, q.qcontent, q.qlevel, q.qparno, q.qhits,
 		q.qresdate, m.id,
-		m.name , q.secret
+		m.name , q.secret, q.replied
 		from qna q
 		JOIN member m on q.qaid = m.id
 		order by
@@ -43,7 +43,7 @@
 	<select id="getCatQnaList" resultMap="qnaRM">
 		select q.qno, q.cate,
 		q.qtitle, q.qcontent, q.qlevel, q.qparno, q.qhits, q.qresdate, m.id,
-		m.name , q.secret
+		m.name , q.secret, q.replied
 		from qna q, member m
 		where (q.qaid=m.id and q.cate=#{cat} )order by q.qparno desc, q.qlevel asc
 	</select>
@@ -52,7 +52,7 @@
 	<select id="getQna" resultMap="qnaRM">
 		select q.qno, q.qtitle, q.qlevel,
 		q.qcontent, q.qparno, q.qhits, q.qresdate, m.id, m.name, q.secret,
-		q.cate
+		q.cate, q.replied
 		from qna q, member m
 		where q.qaid=m.id and q.qno=#{qno}
 	</select>
@@ -62,7 +62,7 @@
 		insert into qna values
 		(default, #{qtitle}, #{qcontent},default, default,
 		default, default,
-		#{qaid}, #{qname}, #{secret}, #{cate})
+		#{qaid}, #{qname}, #{secret}, #{cate}, default)
 	</insert>
 
 	<!-- 질문 글에 대한 부모 글번호 변경 -->
@@ -80,16 +80,20 @@
 		insert into qna values
 		(default, #{qtitle}, #{qcontent}, #{qlevel},
 		#{qparno},
-		default, default, #{qaid}, #{qname}, #{secret}, #{cate});
+		default, default, #{qaid}, #{qname}, #{secret}, #{cate}, #{replied});
 	</insert> 
 
 	<!-- 묻고 답하기 글 변경 -->
 	<update id="editProQna" parameterType="com.proj03.dto.Qna">
 		update qna set
-		qtitle=#{qtitle}, qcontent=#{qcontent}, secret=#{secret} where
+		qtitle=#{qtitle}, qcontent=#{qcontent}, secret=#{secret}, replied=#{replied} where
 		qno=#{qno}
 	</update>
+	<update id="updateReply"  parameterType="com.proj03.dto.Qna">
+		update qna set 
+		replied = #{replied} where qno>0 and qparno = #{qparno}
 
+	</update>
 	<!-- 묻고 답하기 글 조회수 증가 -->
 	<update id="hitCount">
 		update qna set qhits=qhits+1 where qno=#{qno}

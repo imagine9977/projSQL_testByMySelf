@@ -46,8 +46,8 @@ th.item3 {
 #tbQna td:nth-child(3) { display:block; max-width:50%; text-align: left; white-space:nowrap; 
 	text-overflow: ellipsis; overflow:hidden; font-weight: bold; }
 
-th.item4 {
-	width: 15%;
+th.item4 { 
+	width: 8%;
 }
 
 th.item5 {

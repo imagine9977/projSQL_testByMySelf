@@ -69,7 +69,8 @@
 										<input type="button" id="idCkBtn" class="button is-primary"
 										value="아이디 중복 체크" onclick="idCheck()"
 										style="margin-left: 20px"> <input type="hidden"
-										name="idck" id="idck" value="no" /> <c:if test="${empty qid }">
+										name="idck" id="idck" value="no" /> <c:if
+											test="${empty qid }">
 											<p id="msg" style="clear: both; padding: 0.5rem">아직 아이디
 												중복 체크를 하지 않으셨습니다.</p>
 										</c:if> <c:if test="${not empty qid }">
@@ -114,9 +115,9 @@
 									<th style="background-color: #dcdcdc">주소</th>
 									<td><input type="text" name="addr1" id="addr1"
 										placeholder="기본주소 입력" maxlength="150" class="input" required><br>
-									<br> <input type="text" name="addr2" id="addr2"
+										<br> <input type="text" name="addr2" id="addr2"
 										placeholder="상세주소 입력" maxlength="90" class="input" required><br>
-									<br> <input type="text" name="postcode" id="postcode"
+										<br> <input type="text" name="postcode" id="postcode"
 										placeholder="우편번호 입력" maxlength="9" class="input" required>
 										<input type="button" id="isAddrBtn" class="button is-link"
 										value="주소 입력" onclick="findAddr()"> <input
@@ -124,8 +125,9 @@
 								</tr>
 								<tr>
 									<th style="background-color: #dcdcdc">생일</th>
-									<td><input type="date" id="birth" name="birth" max="2077-06-20"
-										min="1900-06-05" value="2000-01-01" class="input" required></td>
+									<td><input type="date" id="birth" name="birth"
+										max="2077-06-20" min="1900-06-05" value="2000-01-01"
+										class="input" required></td>
 								</tr>
 								<tr>
 									<td colspan="2">

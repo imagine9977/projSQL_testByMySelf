@@ -27,17 +27,20 @@ public class QnaDAO implements QnaMapper {
 	@Override
 	public int insQues(Qna qna) {
 		int x= sqlSession.insert("Qna.insQues", qna);
-		return sqlSession.insert("Qna.upParno", qna);
+		return sqlSession.update("Qna.upParno", qna);
 	}
 
 	@Override
 	public int insAnsw(Qna qna) {
-		return sqlSession.insert("Qna.insAnsw", qna);
+		int x= sqlSession.insert("Qna.insAnsw", qna);
+		return sqlSession.update("Qna.updateReply", qna);
 	}
 
 	@Override
 	public int editProQna(Qna qna) {
-		return sqlSession.update("Qna.editProQna", qna);
+		//int qparno = qna.getQparno();
+		int x=  sqlSession.update("Qna.editProQna", qna);
+		return sqlSession.update("Qna.updateReply", qna);
 	}
 
 	@Override

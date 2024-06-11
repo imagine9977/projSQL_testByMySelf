@@ -77,7 +77,7 @@
             %>
             <div style="width: 1400px; margin: 0 auto;">
                 <h3 class="page_qtitle">답변 등록</h3>
-                <form action="${hpath}/qna/insertAnswPro.do" method="post">
+                <form action="${hpath}/qna/insertAnswPro.do" method="post" onsubmit="addHiddenInputForCheckboxes()">
                     <table class="table">
                         <tbody>
                             <tr>
@@ -88,6 +88,7 @@
                                     <input type="hidden" name="qtitle" id="qtitle" value="${qtitle}" />
                                     <c:if test="${secret}">
                                         <div>
+                                        	<input type="hidden"  id="secret" name="secret" value="true" data-switchval >
                                             <input type="checkbox" id="secret" name="secret" value="true" data-switchval disabled="disabled"/> 원문이 비밀글이므로 해제 불가능
                                         </div>
                                     </c:if>
@@ -97,6 +98,17 @@
                                         </div>
                                     </c:if>
                                 </td>
+                                <th scope="row">답변 상태</th>
+                                <td> <c:if test="${sid == 'admin'}">
+										<c:if test="${qna.replied }">
+											<input type="checkbox" id="replied" name="replied"
+												value="${qna.replied }" checked data-switchval />
+										</c:if>
+										<c:if test="${!qna.replied }">
+											<input type="checkbox" id="replied" name="replied"
+												value="${qna.replied }" data-switchval />
+										</c:if>
+										</c:if> <c:if test="${sid != 'admin' }">유저 제한</c:if></td>
                             </tr>
                             <tr>
                                 <th scope="row">고객명</th>
@@ -122,6 +134,17 @@
                     e.target.value = e.target.checked;
                     console.log('current value of checkbox:', e.target.value);
                 });
+                function addHiddenInputForCheckboxes() {
+                    document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+                        if (!checkbox.checked) {
+                            var hiddenInput = document.createElement('input');
+                            hiddenInput.type = 'hidden';
+                            hiddenInput.name = checkbox.name;
+                            hiddenInput.value = 'false';
+                            checkbox.form.appendChild(hiddenInput);
+                        }
+                    });
+                }
             </script>
         </section>
     </div>

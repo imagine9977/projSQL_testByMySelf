@@ -55,20 +55,21 @@
 				<h3 class="page_title">질문 등록</h3>
 				<div class="box box6">
 
-						<h3>1. 동의사항</h3>
-						<ul>
-							<li>공개 문의 [제목]과 [내용]란에는 절대 개인정보를 입력하지 마세요.</li>
-							<li>문의에 욕설, 인격침해, 성희롱 등 수치심을 유발하는 표현이 있다면 상담이 중단될 수 있습니다.</li>
-							<li>질문에 따라 답변은 최소 1일에서 5일정도 걸릴 수 있습니다.</li>
-						</ul>
-						<div class="form-check">
-							<input type="checkbox" class="form-check-input" id="ck_item1"
-								name="ck_item1"> <label for="ck_item1"
-								class="form-check_lable">위 이용약관에 동의합니다.</label>
-						</div>
+					<h3>1. 동의사항</h3>
+					<ul>
+						<li>공개 문의 [제목]과 [내용]란에는 절대 개인정보를 입력하지 마세요.</li>
+						<li>문의에 욕설, 인격침해, 성희롱 등 수치심을 유발하는 표현이 있다면 상담이 중단될 수 있습니다.</li>
+						<li>질문에 따라 답변은 최소 1일에서 5일정도 걸릴 수 있습니다.</li>
+					</ul>
+					<div class="form-check">
+						<input type="checkbox" class="form-check-input" id="ck_item1"
+							name="ck_item1"> <label for="ck_item1"
+							class="form-check_lable">위 이용약관에 동의합니다.</label>
 					</div>
-				<form action="${hpath }/qna/insertQuesPro.do" method="post">
-					
+				</div>
+				<form action="${hpath }/qna/insertQuesPro.do" method="post"
+					onsubmit="return qnaCheck(this)">
+
 
 					<div class=" box7">
 						<h3>2. 문의사항 작성하기</h3>
@@ -83,7 +84,7 @@
 							<tbody>
 								<tr>
 									<th scope="row"><label for="cate">분류</label></th>
-									<td ><select id="cate" name="cate"> 
+									<td><select id="cate" name="cate">
 											<option value="acc">계정</option>
 											<option value="pay">결제</option>
 											<option value="ref">환불</option>
@@ -103,10 +104,12 @@
 
 									<th scope="row">고객명</th>
 									<td colspan="1"><input type="text" style="width: 100px"
-										class="input_st" id="qname" value="${sname}" placeholder="${sname }" disabled></td>
+										class="input_st" id="qname" value="${sname}"
+										placeholder="${sname }" disabled></td>
 									<th scope="row">ID</th>
 									<td><input type="text" style="width: 239px"
-										class="input_st" id="qid" value="${sid}" placeholder="${sid }" disabled></td>
+										class="input_st" id="qid" value="${sid}" placeholder="${sid }"
+										disabled></td>
 								</tr>
 
 
@@ -149,11 +152,27 @@
 								-->
 							</tbody>
 						</table>
+						<script>
+						function qnaCheck(f) {
+							 var checkbox = document.getElementById('ck_item1');
+					            if (!checkbox.checked) {
+					                alert("질문 방침에 동의하지 않으셨습니다.");
+					                return false;
+					            }
+							if (f.input_st.value != "") {
+								alert("질문이 빈칸입니다.");
+								f.input_st.focus();
+								return false;
+							}
+							
+						}
+						</script>
+
 					</div>
 					<div class="btn-group">
 						<button type="submit" class="btn btn-secondary">질문 등록</button>
-						<a href="${hpath }/qna/list.do" class="btn btn-secondary">질문
-							및 답변 목록</a>
+						<a href="${hpath }/qna/list.do" class="btn btn-secondary">질문 및
+							답변 목록</a>
 					</div>
 				</form>
 
@@ -165,11 +184,26 @@
 	</div>
 
 	<script>
-        
+
+   
+   
+
     document.querySelector('[data-switchval]').addEventListener('change', e => {
     	  e.target.value = e.target.checked
     	  console.log('current value of checkbox:', e.target.value)
     	})
+    	
+    	 function addHiddenInputForCheckboxes() {
+        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
+            if (!checkbox.checked) {
+                var hiddenInput = document.createElement('input');
+                hiddenInput.type = 'hidden';
+                hiddenInput.name = checkbox.name;
+                hiddenInput.value = 'false';
+                checkbox.form.appendChild(hiddenInput);
+            }
+        });
+    }
     </script>
 
 

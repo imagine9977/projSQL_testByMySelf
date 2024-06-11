@@ -24,6 +24,7 @@ public class Qna {
 	private boolean secret;
 	private String cate;
 	private Member member;
+	private boolean replied;
 	
 	public int getQno() {
 		return qno;
@@ -97,5 +98,10 @@ public class Qna {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-	
+	public boolean getReplied() {
+		return replied;
+	}
+	public void setReplied(boolean replied) {
+		this.replied = replied;
+	}
 }
